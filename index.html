@@ -6,294 +6,172 @@
     <title>Ce Mâncăm Azi? - Planul Tău Inteligent</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .option-card.selected {
-            border-color: #10b981;
-            background-color: #ecfdf5;
-        }
-        .option-card.selected .check-badge {
-            background-color: #10b981;
-            color: white;
-            border-color: #10b981;
-        }
+        .option-card.selected { border-color: #10b981; background-color: #ecfdf5; }
+        .option-card.selected .check-badge { background-color: #10b981; color: white; border-color: #10b981; }
     </style>
 </head>
 <body class="bg-slate-100 text-slate-800 min-h-screen flex justify-center">
 
 <div class="bg-white w-full max-w-md min-h-screen shadow-2xl flex flex-col justify-between relative overflow-hidden">
 
-    <!-- ========================================================= -->
-    <!-- ZONA 1: ONBOARDING WIZARD (SLIDE-URI PAS CU PAS)          -->
-    <!-- ========================================================= -->
+    <!-- ONBOARDING SLIDES -->
     <div id="onboarding-container" class="flex-1 flex flex-col justify-between bg-slate-50/50">
         
-        <!-- Header cu Săgeată Înapoi și Bară de Progres (Ascuns pe Slide 1) -->
         <div id="wizard-header" class="px-5 pt-5 pb-2 hidden">
             <div class="flex items-center justify-between mb-3">
-                <button onclick="prevSlide()" class="p-2 -ml-2 text-slate-600 hover:text-slate-900 font-bold text-lg">
-                    ←
-                </button>
-                <span id="wizard-category" class="text-xs font-bold uppercase tracking-wider text-slate-400">Informații de bază</span>
+                <button type="button" onclick="prevSlide()" class="p-2 -ml-2 text-slate-600 font-bold text-lg">←</button>
+                <span id="wizard-category" class="text-xs font-bold uppercase tracking-wider text-slate-400">Obiectivul tău</span>
                 <div class="w-6"></div>
             </div>
-            <!-- Bara de progres -->
             <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
-                <div id="progress-bar" class="bg-emerald-500 h-full transition-all duration-300" style="width: 20%"></div>
+                <div id="progress-bar" class="bg-emerald-500 h-full transition-all duration-300" style="width: 25%"></div>
             </div>
         </div>
 
-        <!-- SLIDE 1: BUN VENIT -->
+        <!-- SLIDE 1 -->
         <div id="slide-1" class="slide flex-1 flex flex-col justify-between p-6 text-center bg-gradient-to-b from-amber-50/60 via-white to-emerald-50/40">
-            <div class="mt-12 space-y-6">
+            <div class="mt-10 space-y-5">
                 <div class="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full shadow-sm border border-slate-100 text-xs font-bold text-emerald-700">
                     <span>🇷🇴</span> Creat pentru bucătăria ta
                 </div>
-                <div class="text-6xl my-4">🍲</div>
-                <div class="space-y-2">
-                    <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Bine ai venit la<br><span class="text-emerald-600">Ce Mâncăm Azi?</span></h2>
-                    <p class="text-sm text-slate-500 max-w-xs mx-auto leading-relaxed">
-                        Gătește inteligent din ce ai în frigider, economisește bani la cumpărături și scapă de stresul zilnic al meselor.
-                    </p>
-                </div>
-                <div class="flex justify-center gap-6 pt-4 text-xs text-slate-500 font-medium">
-                    <div class="flex flex-col items-center">
-                        <span class="text-lg font-extrabold text-slate-800">-30%</span>
-                        <span>Risipă alimentară</span>
-                    </div>
+                <div class="text-6xl my-3">🍲</div>
+                <h2 class="text-3xl font-extrabold text-slate-900">Bine ai venit la<br><span class="text-emerald-600">Ce Mâncăm Azi?</span></h2>
+                <p class="text-sm text-slate-500 max-w-xs mx-auto">
+                    Gătește inteligent din ce ai în frigider, economisește bani la cumpărături și scapă de stresul meselor.
+                </p>
+                <div class="flex justify-center gap-6 pt-3 text-xs text-slate-500 font-medium">
+                    <div><span class="block text-lg font-extrabold text-slate-800">-30%</span>Risipă alimentară</div>
                     <div class="w-px bg-slate-200"></div>
-                    <div class="flex flex-col items-center">
-                        <span class="text-lg font-extrabold text-slate-800">15 min</span>
-                        <span>Rețete rapide</span>
-                    </div>
+                    <div><span class="block text-lg font-extrabold text-slate-800">15 min</span>Rețete rapide</div>
                 </div>
             </div>
 
             <div class="pb-4 space-y-3">
-                <button onclick="nextSlide()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 rounded-2xl shadow-lg shadow-emerald-500/30 text-base transition-all active:scale-95 flex items-center justify-center gap-2">
-                    Începeți <span>›</span>
+                <button type="button" onclick="nextSlide()" class="w-full bg-emerald-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-emerald-500/30 text-base active:scale-95 transition-transform">
+                    Începeți ›
                 </button>
-                <button onclick="skipOnboarding()" class="text-xs text-slate-400 font-medium hover:text-slate-600">
+                <button type="button" onclick="finishOnboarding()" class="w-full text-xs text-slate-400 font-medium py-1">
                     Am deja profil • Intră direct în aplicație
                 </button>
             </div>
         </div>
 
-        <!-- SLIDE 2: OBIECTIV PRINCIPAL -->
+        <!-- SLIDE 2: OBIECTIV -->
         <div id="slide-2" class="slide hidden flex-1 flex-col justify-between p-6">
-            <div class="space-y-5">
-                <h2 class="text-2xl font-extrabold text-slate-900 text-center leading-snug">
-                    Care este obiectivul tău principal?
-                </h2>
-                <div class="space-y-3" id="goal-options">
-                    <div onclick="selectSingleOption('goal', 'Economie maximă la buget', this)" class="option-card selected bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">💰</span>
-                            <span class="font-bold text-sm text-slate-800">Economie maximă la buget</span>
-                        </div>
+            <div class="space-y-4">
+                <h2 class="text-2xl font-extrabold text-slate-900 text-center">Care este obiectivul tău principal?</h2>
+                <div class="space-y-3">
+                    <div onclick="selectSingle('goal', 'Economie maximă la buget', this)" class="option-card selected bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">💰</span><span class="font-bold text-sm">Economie maximă la buget</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
-
-                    <div onclick="selectSingleOption('goal', 'Slăbire sănătoasă', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">🥗</span>
-                            <span class="font-bold text-sm text-slate-800">Slăbire sănătoasă</span>
-                        </div>
+                    <div onclick="selectSingle('goal', 'Slăbire sănătoasă', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">🥗</span><span class="font-bold text-sm">Slăbire sănătoasă</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
-
-                    <div onclick="selectSingleOption('goal', 'Gătit rapid (sub 20 min)', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">⚡</span>
-                            <span class="font-bold text-sm text-slate-800">Gătit rapid (sub 20 min)</span>
-                        </div>
+                    <div onclick="selectSingle('goal', 'Gătit rapid (sub 20 min)', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">⚡</span><span class="font-bold text-sm">Gătit rapid (sub 20 min)</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
-
-                    <div onclick="selectSingleOption('goal', 'Energie și masă musculară', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">💪</span>
-                            <span class="font-bold text-sm text-slate-800">Energie și masă musculară</span>
-                        </div>
+                    <div onclick="selectSingle('goal', 'Energie și masă musculară', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">💪</span><span class="font-bold text-sm">Energie și masă musculară</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
                 </div>
             </div>
-            <button onclick="nextSlide()" class="w-full bg-emerald-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-emerald-500/20 text-sm active:scale-95 transition-transform">
-                Următorul
-            </button>
+            <button type="button" onclick="nextSlide()" class="w-full bg-emerald-500 text-white font-bold py-4 rounded-2xl text-sm">Următorul</button>
         </div>
 
-        <!-- SLIDE 3: STIL ALIMENTAR & RESTRICȚII -->
+        <!-- SLIDE 3: DIETĂ -->
         <div id="slide-3" class="slide hidden flex-1 flex-col justify-between p-6">
-            <div class="space-y-5">
-                <h2 class="text-2xl font-extrabold text-slate-900 text-center leading-snug">
-                    Ce stil alimentar urmezi?
-                </h2>
-                <div class="space-y-3" id="diet-options">
-                    <div onclick="selectSingleOption('diet', 'Normal (mănânc orice)', this)" class="option-card selected bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">🍽️</span>
-                            <span class="font-bold text-sm text-slate-800">Normal (mănânc orice)</span>
-                        </div>
+            <div class="space-y-4">
+                <h2 class="text-2xl font-extrabold text-slate-900 text-center">Ce stil alimentar urmezi?</h2>
+                <div class="space-y-3">
+                    <div onclick="selectSingle('diet', 'Normal (mănânc orice)', this)" class="option-card selected bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">🍽️</span><span class="font-bold text-sm">Normal (mănânc orice)</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
-
-                    <div onclick="selectSingleOption('diet', 'Fără lactoză', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">🥛</span>
-                            <span class="font-bold text-sm text-slate-800">Fără lactoză</span>
-                        </div>
+                    <div onclick="selectSingle('diet', 'Fără lactoză', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">🥛</span><span class="font-bold text-sm">Fără lactoză</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
-
-                    <div onclick="selectSingleOption('diet', 'Post / Vegetarian', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">🥦</span>
-                            <span class="font-bold text-sm text-slate-800">Post / Vegetarian</span>
-                        </div>
+                    <div onclick="selectSingle('diet', 'Post / Vegetarian', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">🥦</span><span class="font-bold text-sm">Post / Vegetarian</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
-
-                    <div onclick="selectSingleOption('diet', 'Scăzut în carbohidrați (Low-Carb)', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">🥑</span>
-                            <span class="font-bold text-sm text-slate-800">Scăzut în carbohidrați</span>
-                        </div>
+                    <div onclick="selectSingle('diet', 'Scăzut în carbohidrați', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">🥑</span><span class="font-bold text-sm">Scăzut în carbohidrați</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
                 </div>
             </div>
-            <button onclick="nextSlide()" class="w-full bg-emerald-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-emerald-500/20 text-sm active:scale-95 transition-transform">
-                Următorul
-            </button>
+            <button type="button" onclick="nextSlide()" class="w-full bg-emerald-500 text-white font-bold py-4 rounded-2xl text-sm">Următorul</button>
         </div>
 
-        <!-- SLIDE 4: OBICEIURI & CASEROLĂ SERVICIU -->
+        <!-- SLIDE 4: CASEROLĂ -->
         <div id="slide-4" class="slide hidden flex-1 flex-col justify-between p-6">
-            <div class="space-y-5">
-                <h2 class="text-2xl font-extrabold text-slate-900 text-center leading-snug">
-                    Iei mâncare la pachet (serviciu)?
-                </h2>
-                <p class="text-xs text-slate-400 text-center -mt-3">
-                    Dacă alegi Da, aplicația îți calculează automat o porție în plus la cină pentru caserola de a doua zi.
-                </p>
-                <div class="space-y-3" id="lunchbox-options">
-                    <div onclick="selectSingleOption('lunchbox', 'Da, iau caserolă la serviciu', this)" class="option-card selected bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">🍱</span>
-                            <div>
-                                <div class="font-bold text-sm text-slate-800">Da, iau caserolă la serviciu</div>
-                                <div class="text-xs text-slate-400">Gătesc o dată, mănânc de două ori</div>
-                            </div>
-                        </div>
+            <div class="space-y-4">
+                <h2 class="text-2xl font-extrabold text-slate-900 text-center">Iei mâncare la pachet (serviciu)?</h2>
+                <p class="text-xs text-slate-400 text-center">Calculăm automat o porție în plus la cină pentru caserola de a doua zi.</p>
+                <div class="space-y-3">
+                    <div onclick="selectSingle('lunchbox', 'Da, iau caserolă la serviciu', this)" class="option-card selected bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">🍱</span><div><div class="font-bold text-sm">Da, iau caserolă la serviciu</div><div class="text-xs text-slate-400">Gătesc o dată, mănânc de două ori</div></div></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
-
-                    <div onclick="selectSingleOption('lunchbox', 'Nu, mănânc doar acasă', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">🏠</span>
-                            <div>
-                                <div class="font-bold text-sm text-slate-800">Nu, mănânc doar acasă</div>
-                                <div class="text-xs text-slate-400">Calcul strict pentru 1 porție</div>
-                            </div>
-                        </div>
+                    <div onclick="selectSingle('lunchbox', 'Nu, mănânc doar acasă', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">🏠</span><div><div class="font-bold text-sm">Nu, mănânc doar acasă</div><div class="text-xs text-slate-400">Calcul strict pentru 1 porție</div></div></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
                 </div>
             </div>
-            <button onclick="nextSlide()" class="w-full bg-emerald-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-emerald-500/20 text-sm active:scale-95 transition-transform">
-                Următorul
-            </button>
+            <button type="button" onclick="nextSlide()" class="w-full bg-emerald-500 text-white font-bold py-4 rounded-2xl text-sm">Următorul</button>
         </div>
 
-        <!-- SLIDE 5: APARATURA DIN BUCĂTĂRIE (SELECȚIE MULTIPLĂ) -->
+        <!-- SLIDE 5: APARATURĂ -->
         <div id="slide-5" class="slide hidden flex-1 flex-col justify-between p-6">
-            <div class="space-y-5">
-                <h2 class="text-2xl font-extrabold text-slate-900 text-center leading-snug">
-                    Ce aparatură ai în bucătărie?
-                </h2>
-                <p class="text-xs text-slate-400 text-center -mt-3">
-                    Poți selecta mai multe opțiuni. Îți dăm doar rețete pe care le poți face.
-                </p>
-                <div class="space-y-3" id="appliances-options">
-                    <div onclick="toggleMultiOption('Aragaz / Tigaie', this)" class="option-card selected bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">🍳</span>
-                            <span class="font-bold text-sm text-slate-800">Aragaz / Tigaie clasică</span>
-                        </div>
+            <div class="space-y-4">
+                <h2 class="text-2xl font-extrabold text-slate-900 text-center">Ce aparatură ai în bucătărie?</h2>
+                <div class="space-y-3">
+                    <div onclick="toggleMulti('Aragaz / Tigaie', this)" class="option-card selected bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">🍳</span><span class="font-bold text-sm">Aragaz / Tigaie clasică</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
-
-                    <div onclick="toggleMultiOption('Airfryer', this)" class="option-card selected bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">💨</span>
-                            <span class="font-bold text-sm text-slate-800">Airfryer (Friteuză cu aer cald)</span>
-                        </div>
+                    <div onclick="toggleMulti('Airfryer', this)" class="option-card selected bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">💨</span><span class="font-bold text-sm">Airfryer</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
-
-                    <div onclick="toggleMultiOption('Cuptor', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">🔥</span>
-                            <span class="font-bold text-sm text-slate-800">Cuptor electric / pe gaz</span>
-                        </div>
+                    <div onclick="toggleMulti('Cuptor', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">🔥</span><span class="font-bold text-sm">Cuptor electric / pe gaz</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
-
-                    <div onclick="toggleMultiOption('Multicooker', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 shadow-sm flex items-center justify-between cursor-pointer transition-all">
-                        <div class="flex items-center gap-3.5">
-                            <span class="text-2xl">🍲</span>
-                            <span class="font-bold text-sm text-slate-800">Multicooker / Oală sub presiune</span>
-                        </div>
+                    <div onclick="toggleMulti('Multicooker', this)" class="option-card bg-white p-4 rounded-2xl border-2 border-slate-100 flex items-center justify-between cursor-pointer">
+                        <div class="flex items-center gap-3"><span class="text-2xl">🍲</span><span class="font-bold text-sm">Multicooker / Oală sub presiune</span></div>
                         <div class="check-badge w-6 h-6 rounded-full border-2 border-slate-200 flex items-center justify-center text-xs font-bold">✓</div>
                     </div>
                 </div>
             </div>
-            <button onclick="startCalculation()" class="w-full bg-emerald-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-emerald-500/20 text-sm active:scale-95 transition-transform">
-                Generează Planul Meu
-            </button>
+            <button type="button" onclick="startCalc()" class="w-full bg-emerald-500 text-white font-bold py-4 rounded-2xl text-sm">Generează Planul Meu</button>
         </div>
 
-        <!-- SLIDE 6A: ECRAN DE CALCULARE (ANIMAT 2 SECUNDE) -->
-        <div id="slide-calculating" class="slide hidden flex-1 flex-col justify-center p-8 space-y-8 bg-white">
-            <h2 class="text-2xl font-extrabold text-slate-900 text-center">
-                Personalizarea planului tău...
-            </h2>
-            
-            <div class="space-y-5">
-                <div>
-                    <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
-                        <span>Analizând obiectivul ales</span>
-                        <span class="text-emerald-600">✓</span>
-                    </div>
-                    <p id="calc-goal-text" class="text-xs text-slate-400 mb-2">Economie maximă la buget</p>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-emerald-500 h-full w-full"></div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
-                        <span>Filtrând rețetele după stil & aparatură</span>
-                        <span class="text-emerald-600">✓</span>
-                    </div>
-                    <p id="calc-diet-text" class="text-xs text-slate-400 mb-2">Normal • Airfryer, Aragaz</p>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-emerald-500 h-full w-full"></div>
-                    </div>
-                </div>
-
-                <div class="pt-2">
-                    <div class="w-full bg-slate-100 h-12 rounded-2xl overflow-hidden relative flex items-center px-4">
-                        <div id="calc-bar" class="bg-emerald-500 h-full absolute left-0 top-0 transition-all duration-300" style="width: 15%"></div>
-                        <span id="calc-percent" class="relative z-10 font-extrabold text-white text-base">15%</span>
-                    </div>
-                </div>
+        <!-- SLIDE 6A: CALCUL -->
+        <div id="slide-calc" class="slide hidden flex-1 flex-col justify-center p-8 space-y-6 bg-white">
+            <h2 class="text-2xl font-extrabold text-slate-900 text-center">Personalizarea planului tău...</h2>
+            <p id="calc-summary" class="text-xs text-slate-500 text-center"></p>
+            <div class="w-full bg-slate-100 h-12 rounded-2xl overflow-hidden relative flex items-center px-4">
+                <div id="calc-bar" class="bg-emerald-500 h-full absolute left-0 top-0 transition-all duration-300" style="width: 20%"></div>
+                <span id="calc-percent" class="relative z-10 font-extrabold text-white text-base">20%</span>
             </div>
         </div>
 
-        <!-- SLIDE 6B: PAYWALL PRO (FAMILIE) CU BUTON X PENTRU VARIANTA GRATUITĂ -->
+        <!-- SLIDE 6B: PRO FAMILIE -->
         <div id="slide-paywall" class="slide hidden flex-1 flex-col justify-between p-6 bg-gradient-to-b from-orange-50 to-white relative">
-            <!-- Buton X închidere pentru a continua Gratuit -->
-            <button onclick="finishOnboarding()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-200/80 text-slate-600 flex 
+            <button type="button" onclick="finishOnboarding()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center font-bold">✕</button>
+            <div class="mt-8 text-center space-y-4">
+                <span class="inline-block bg-orange-100 text-orange-700 text-xs font-extrabold px-3 py-1 rounded-full">👑 PLANUL FAMILIE PRO</span>
+                <h2 class="text-2xl font-extrabold text-slate-900">Gătești pentru mai multe persoane acasă?</h2>
+                <p class="text-xs text-slate-500">Planul tău individual gratuit este gata! Treci la PRO oricând vrei să adaugi partenerul și copiii.</p>
+                <div class="space-y-3 pt-2 text-left">
+                    <div class="bg-white p-4 rounded-2xl border border-slate
+                                                                                                
